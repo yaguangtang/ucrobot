@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.csjbot.coshandler.core.CsjRobot;
+import com.csjbot.coshandler.core.Speech;
+import com.csjbot.coshandler.core.State;
 import com.csjbot.coshandler.listener.OnCameraListener;
 import com.csjbot.coshandler.listener.OnDetectPersonListener;
 import com.csjbot.coshandler.listener.OnFaceListener;
@@ -52,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
                         if (i > 0 && i < 360) {
                             if (i <= 180) {
                                 CsjlogProxy.getInstance().debug("向左转:+" + i);
-                                if (mCsjBot.getState().getChargeState() == CsjRobot.State.NOT_CHARGING) {
+                                if (mCsjBot.getState().getChargeState() == State.NOT_CHARGING) {
                                     mCsjBot.getAction().moveAngle(i,null);
                                 }
                             } else {
                                 CsjlogProxy.getInstance().debug("向右转:-" + (360 - i));
-                                if (mCsjBot.getState().getChargeState() == CsjRobot.State.NOT_CHARGING) {
+                                if (mCsjBot.getState().getChargeState() == State.NOT_CHARGING) {
                                     mCsjBot.getAction().moveAngle(-(360 - i),null);
                                 }
                             }
@@ -73,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
             public void speechInfo(String s, int i) {
 
                 Log.d("TAG","registerSpeechListener:s:"+s);
-                if(CsjRobot.Speech.SPEECH_RECOGNITION_RESULT == i){ // 识别到的信息
+                if(Speech.SPEECH_RECOGNITION_RESULT == i){ // 识别到的信息
 
-                }else if(CsjRobot.Speech.SPEECH_RECOGNITION_AND_ANSWER_RESULT == i){// 识别到的信息与的回答
+                }else if(Speech.SPEECH_RECOGNITION_AND_ANSWER_RESULT == i){// 识别到的信息与的回答
 
                 }
             }
@@ -175,21 +177,6 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-
-                    @Override
-                    public void moveResult(String s) {
-
-                    }
-
-                    @Override
-                    public void moveToResult(String s) {
-
-                    }
-
-                    @Override
-                    public void cancelResult(String s) {
-
-                    }
                 });
             }
         });
@@ -220,21 +207,6 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-
-                    @Override
-                    public void moveResult(String s) {
-
-                    }
-
-                    @Override
-                    public void moveToResult(String s) {
-
-                    }
-
-                    @Override
-                    public void cancelResult(String s) {
-
-                    }
                 });
             }
         });
@@ -252,8 +224,8 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void moveToResult(String s) {
-
+                    public void messageSendResult(String s) {
+                        Log.d("TAG","导航消息下发成功");
                     }
 
                     @Override
@@ -282,9 +254,10 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void moveToResult(String s) {
-
+                    public void messageSendResult(String s) {
+                        Log.d("TAG","导航消息下发成功");
                     }
+
 
                     @Override
                     public void cancelResult(String s) {

@@ -211,14 +211,11 @@ CsjRobot.getInstance().init(this);
         // 导航方法(机器人导航到某个点)
         String json = "";
         /*{
-            "msg_id":"NAVI_ROBOT_MOVE_TO_REQ",
-                "pos": {
                     "x":2,
                     "y":1,
                     "z":0,
                     "rotation":30
-                 }
-          }*/
+                 }*/
         action.navi(json, new OnNaviListener() {
             @Override
             public void moveResult(String s) {

@@ -17,7 +17,7 @@ repositories {
 implementation 'io.netty:netty-all:4.1.23.Final'
 ```
 
-### 第三部 初始化
+### 第三步 初始化
 ##### 在Application中初始化SDK
 ```java
 CsjRobot.getInstance().init(this);

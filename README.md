@@ -56,10 +56,7 @@ CsjRobot.getInstance().init(this);
             public void response(int i) {
                 Log.d("TAG","registerWakeupListener:i:"+i);
                 mCsjBot.getTts().startSpeaking("我在呢!",null);
-                mCsjBot.getAction().moveAngle(i, new OnGoRotationListener() {
-                    @Override
-                    public void response(int i) {
-                        if (i > 0 && i < 360) {
+                if (i > 0 && i < 360) {
                             if (i <= 180) {
                                 CsjlogProxy.getInstance().debug("向左转:+" + i);
                                 if (mCsjBot.getState().getChargeState() == State.NOT_CHARGING) {
@@ -71,9 +68,7 @@ CsjRobot.getInstance().init(this);
                                     mCsjBot.getAction().moveAngle(-(360 - i),null);
                                 }
                             }
-                        }
-                    }
-                });
+                }
             }
         });
 ```

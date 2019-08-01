@@ -319,19 +319,6 @@ public class MainActivity extends AppCompatActivity {
         // 开启语音识别(多次)
         mCsjBot.getSpeech().startIsr();
 
-        mCsjBot.getState().getSN(new OnSNListener() {
-            @Override
-            public void response(final String s) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Button bt = (Button) findViewById(R.id.bt_save_map);
-                        bt.setText(s);
-                    }
-                });
-            }
-        });
-
     }
 
     private void actionTest(){

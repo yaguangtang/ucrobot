@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.csjbot.coshandler.core.Action;
@@ -21,6 +22,7 @@ import com.csjbot.coshandler.listener.OnDetectPersonListener;
 import com.csjbot.coshandler.listener.OnDeviceInfoListener;
 import com.csjbot.coshandler.listener.OnExpressionListener;
 import com.csjbot.coshandler.listener.OnFaceListener;
+import com.csjbot.coshandler.listener.OnFaceSaveListener;
 import com.csjbot.coshandler.listener.OnGetAllFaceListener;
 import com.csjbot.coshandler.listener.OnGetVersionListener;
 import com.csjbot.coshandler.listener.OnGoRotationListener;
@@ -31,6 +33,7 @@ import com.csjbot.coshandler.listener.OnNaviSearchListener;
 import com.csjbot.coshandler.listener.OnPositionListener;
 import com.csjbot.coshandler.listener.OnRobotStateListener;
 import com.csjbot.coshandler.listener.OnSNListener;
+import com.csjbot.coshandler.listener.OnSnapshotoListener;
 import com.csjbot.coshandler.listener.OnSpeakListener;
 import com.csjbot.coshandler.listener.OnSpeechGetResultListener;
 import com.csjbot.coshandler.listener.OnSpeechListener;
@@ -315,6 +318,19 @@ public class MainActivity extends AppCompatActivity {
 
         // 开启语音识别(多次)
         mCsjBot.getSpeech().startIsr();
+
+        mCsjBot.getState().getSN(new OnSNListener() {
+            @Override
+            public void response(final String s) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Button bt = (Button) findViewById(R.id.bt_save_map);
+                        bt.setText(s);
+                    }
+                });
+            }
+        });
 
     }
 
@@ -629,10 +645,33 @@ public class MainActivity extends AppCompatActivity {
 
 
         // 摄像头拍照
-        face.snapshot();
+        face.snapshot(new OnSnapshotoListener() {
+            @Override
+            public void response(String s) {
+                /*
+                * {
+                    "error_code": 0,
+                    "face_position": 0,
+                    "msg_id":”FACE_SNAPSHOT_RESULT_RSP"
+                    } */
+                // erro_code : 0表示有人脸 其他表示无人脸
+            }
+        });
 
         // 人脸注册(保存当前拍照的人脸)
-        face.saveFace("张三");
+        face.saveFace("张三", new OnFaceSaveListener() {
+            @Override
+            public void response(String s) {
+                /*
+                * {
+                    "msg_id":"FACE_SAVE_RSP",
+                    “person_id”:”personx20170107161021mRJOVw”,
+                       “error_code":0
+                   }*/
+
+                // error_cdoe : 0 成功 , 40002 人脸已经注册,40003 人脸姓名格式错误
+            }
+        });
 
         // 人脸信息删除
         face.faceDel("faceId");

@@ -56,10 +56,7 @@ CsjRobot.getInstance().init(this);
             public void response(int i) {
                 Log.d("TAG","registerWakeupListener:i:"+i);
                 mCsjBot.getTts().startSpeaking("我在呢!",null);
-                mCsjBot.getAction().moveAngle(i, new OnGoRotationListener() {
-                    @Override
-                    public void response(int i) {
-                        if (i > 0 && i < 360) {
+                if (i > 0 && i < 360) {
                             if (i <= 180) {
                                 CsjlogProxy.getInstance().debug("向左转:+" + i);
                                 if (mCsjBot.getState().getChargeState() == State.NOT_CHARGING) {
@@ -71,9 +68,7 @@ CsjRobot.getInstance().init(this);
                                     mCsjBot.getAction().moveAngle(-(360 - i),null);
                                 }
                             }
-                        }
-                    }
-                });
+                }
             }
         });
 ```
@@ -476,10 +471,33 @@ CsjRobot.getInstance().init(this);
 
 
         // 摄像头拍照
-        face.snapshot();
+        face.snapshot(new OnSnapshotoListener() {
+            @Override
+            public void response(String s) {
+                /*
+                * {
+                    "error_code": 0,
+                    "face_position": 0,
+                    "msg_id":”FACE_SNAPSHOT_RESULT_RSP"
+                    } */
+                // erro_code : 0表示有人脸 其他表示无人脸
+            }
+        });
 
         // 人脸注册(保存当前拍照的人脸)
-        face.saveFace("张三");
+        face.saveFace("张三", new OnFaceSaveListener() {
+            @Override
+            public void response(String s) {
+                /*
+                * {
+                    "msg_id":"FACE_SAVE_RSP",
+                    “person_id”:”personx20170107161021mRJOVw”,
+                       “error_code":0
+                   }*/
+
+                // error_cdoe : 0 成功 , 40002 人脸已经注册,40003 人脸姓名格式错误
+            }
+        });
 
         // 人脸信息删除
         face.faceDel("faceId");

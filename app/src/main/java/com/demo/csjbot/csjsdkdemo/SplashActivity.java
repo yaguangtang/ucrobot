@@ -13,27 +13,31 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        if(CsjRobot.getInstance().getState().isConnect()){
+            startActivity(new Intent(SplashActivity.this,MainActivity.class));
+        }else{
+            CsjRobot.getInstance().registerConnectListener(new OnConnectListener() {
+                @Override
+                public void success() {
+                    startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                }
 
-        CsjRobot.getInstance().registerConnectListener(new OnConnectListener() {
-            @Override
-            public void success() {
-                startActivity(new Intent(SplashActivity.this,MainActivity.class));
-            }
+                @Override
+                public void faild() {
 
-            @Override
-            public void faild() {
+                }
 
-            }
+                @Override
+                public void timeout() {
 
-            @Override
-            public void timeout() {
+                }
 
-            }
+                @Override
+                public void disconnect() {
 
-            @Override
-            public void disconnect() {
+                }
+            });
+        }
 
-            }
-        });
     }
 }

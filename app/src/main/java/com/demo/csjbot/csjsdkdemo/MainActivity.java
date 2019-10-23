@@ -1,11 +1,10 @@
 package com.demo.csjbot.csjsdkdemo;
 
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.csjbot.coshandler.core.Action;
@@ -16,10 +15,8 @@ import com.csjbot.coshandler.core.Face;
 import com.csjbot.coshandler.core.Speech;
 import com.csjbot.coshandler.core.State;
 import com.csjbot.coshandler.core.Version;
-import com.csjbot.coshandler.global.REQConstants;
 import com.csjbot.coshandler.listener.OnCameraListener;
 import com.csjbot.coshandler.listener.OnDetectPersonListener;
-import com.csjbot.coshandler.listener.OnDeviceInfoListener;
 import com.csjbot.coshandler.listener.OnExpressionListener;
 import com.csjbot.coshandler.listener.OnFaceListener;
 import com.csjbot.coshandler.listener.OnFaceSaveListener;
@@ -98,25 +95,29 @@ public class MainActivity extends AppCompatActivity {
         // 语音识别
         mCsjBot.registerSpeechListener(new OnSpeechListener() {
             @Override
-            public void speechInfo(String s, int i) {
-
-                // 简单解析示例
-                Log.d("TAG","registerSpeechListener:s:"+s);
-                if(Speech.SPEECH_RECOGNITION_RESULT == i){ // 识别到的信息
-                    try {
-                        String text = new JSONObject(s).getString("text");
-                        Toast.makeText(MainActivity.this, "识别到的文本:"+text, Toast.LENGTH_SHORT).show();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+            public void speechInfo(final String s, final int i) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // 简单解析示例
+                        Log.d("TAG","registerSpeechListener:s:"+s);
+                        if(Speech.SPEECH_RECOGNITION_RESULT == i){ // 识别到的信息
+                            try {
+                                String text = new JSONObject(s).getString("text");
+                                Toast.makeText(MainActivity.this, "识别到的文本:"+text, Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }else if(Speech.SPEECH_RECOGNITION_AND_ANSWER_RESULT == i){// 识别到的信息与的回答
+                            try {
+                                String say = new JSONObject(s).getJSONObject("result").getJSONObject("data").getString("say");
+                                Toast.makeText(MainActivity.this, "获取的答案信息:"+say, Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
-                }else if(Speech.SPEECH_RECOGNITION_AND_ANSWER_RESULT == i){// 识别到的信息与的回答
-                    try {
-                        String say = new JSONObject(s).getJSONObject("result").getJSONObject("data").getString("say");
-                        Toast.makeText(MainActivity.this, "获取的答案信息:"+say, Toast.LENGTH_SHORT).show();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
+                });
             }
         });
 

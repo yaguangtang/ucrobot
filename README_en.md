@@ -1,4 +1,5 @@
 ## Integrated AAR file instructions
+## [中文文档点我](http://gitlab.csjbot.com/jingweicheng/csjsdkdemo/blob/master/README_zh.md)
 ### Step 1 import AAR file
 ##### Add AAR file to LIBS file
 ```gradle

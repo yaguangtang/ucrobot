@@ -20,6 +20,19 @@ implementation 'io.netty:netty-all:4.1.23.Final'
 ### 第三步 初始化
 ##### 在Application中初始化SDK
 ```java
+// 在开发者平台申请的key与secret进行授权(只需授权一次即可,后续使用无需授权)
+// 开发者平台网址:open.csjbot.com
+CsjRobot.authentication(this,"123", "456", new OnAuthenticationListener() {
+            @Override
+            public void success() {
+                Log.d("TAG","授权成功!");
+            }
+
+            @Override
+            public void error() {
+                Log.d("TAG","授权失败!");
+            }
+        });
 CsjRobot.getInstance().init(this);
 ```
 ## 机器人功能使用说明

@@ -21,6 +21,19 @@ implementation 'io.netty:netty-all:4.1.23.Final'
 ### Step 3 initialization
 ##### Initialize SDK in application
 ```java
+// Please fill in key and secret for verification
+// Developer Platform open.csjbot.com
+CsjRobot.authentication(this,"123", "456", new OnAuthenticationListener() {
+            @Override
+            public void success() {
+            
+            }
+
+            @Override
+            public void error() {
+            
+            }
+        });
 CsjRobot.getInstance().init(this);
 ```
 ## Robot function instruction

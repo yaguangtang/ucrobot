@@ -3,53 +3,21 @@
 ##### 将aar文件添加到libs文件中
 ```gradle
 implementation(name: 'csjsdk-beta', ext: 'aar')
-implementation(name: 'asragent', ext: 'aar')
-implementation(name: 'baseagent', ext: 'aar')
-implementation(name: 'cosclient-ng', ext: 'aar')
-implementation(name: 'expressionagent', ext: 'aar')
-implementation(name: 'faceagent', ext: 'aar')
-implementation(name: 'robotactionagent', ext: 'aar')
-implementation(name: 'slamagent', ext: 'aar')
-implementation(name: 'snagent', ext: 'aar')
 ```
 ##### 在app的build.gradle文件的android{}结构下添加如下代码
 ```gradle
-    sourceSets {
-        main {
-            // 将 jniLib 指向 libs
-            jniLibs.srcDir 'libs'
-        }
-    }
     repositories {
         flatDir {
             dirs 'libs'
         }
     }
-
-    compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
-    }
 ```
 ### 第二步 引入依赖库
 ```gradle
 implementation 'io.netty:netty-all:4.1.23.Final'
-implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-implementation 'com.google.code.gson:gson:2.8.1'
-implementation 'io.reactivex.rxjava2:rxjava:2.1.2'
-implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
-implementation 'org.greenrobot:greendao:3.1.0'
-implementation 'org.greenrobot:greendao-generator:3.1.0'
 ```
 
-### 第三步 引入so库
-##### 在main目录下新建jniLibs目录
-##### 在jniLibs目录下新建armeabi-v7a目录并放入libmsc.so
-
-### 第四步 初始化
+### 第三步 初始化
 ##### 在Application中初始化SDK
 ```java
 // 在开发者平台申请的key与secret进行授权(只需授权一次即可,后续使用无需授权)
@@ -467,7 +435,7 @@ CsjRobot.getInstance().init(this);
         // 机器人语音
         Speech speech = CsjRobot.getInstance().getSpeech();
 
-        // 开启讯飞语音服务(默认未开启，需手动调用)
+        // 开启讯飞语音服务(默认开启，无需手动调用)
         speech.startSpeechService();
 
         // 关闭讯飞语音服务

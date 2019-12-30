@@ -19,6 +19,7 @@ implementation 'io.netty:netty-all:4.1.23.Final'
 
 ### 第三步 初始化
 ##### 在Application中初始化SDK
+##### 请保证设备端有网络的情况下进行代码授权
 ```java
 // 在开发者平台申请的key与secret进行授权(只需授权一次即可,后续使用无需授权)
 // 开发者平台网址:http://openpro.csjbot.com

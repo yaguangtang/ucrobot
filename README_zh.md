@@ -21,7 +21,7 @@ implementation 'io.netty:netty-all:4.1.23.Final'
 ##### 在Application中初始化SDK
 ```java
 // 在开发者平台申请的key与secret进行授权(只需授权一次即可,后续使用无需授权)
-// 开发者平台网址:open.csjbot.com
+// 开发者平台网址:http://openpro.csjbot.com
 CsjRobot.authentication(this,"123", "456", new OnAuthenticationListener() {
             @Override
             public void success() {

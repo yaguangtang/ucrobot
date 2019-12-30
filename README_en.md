@@ -20,6 +20,7 @@ implementation 'io.netty:netty-all:4.1.23.Final'
 
 ### Step 3 initialization
 ##### Initialize SDK in application
+##### Please make sure to authorize the code when the device has a network
 ```java
 // Please fill in key and secret for verification
 // Developer Platform http://openpro.csjbot.com

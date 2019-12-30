@@ -6,11 +6,11 @@ implementation(name: 'csjsdk-beta', ext: 'aar')
 ```
 ##### 在app的build.gradle文件的android{}结构下添加如下代码
 ```gradle
-repositories {
-    flatDir {
-        dirs 'libs'
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
     }
-}
 ```
 ### 第二步 引入依赖库
 ```gradle
@@ -435,7 +435,7 @@ CsjRobot.getInstance().init(this);
         // 机器人语音
         Speech speech = CsjRobot.getInstance().getSpeech();
 
-        // 开启讯飞语音服务(默认开启，无需操作)
+        // 开启讯飞语音服务(默认开启，无需手动调用)
         speech.startSpeechService();
 
         // 关闭讯飞语音服务

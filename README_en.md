@@ -306,9 +306,11 @@ CsjRobot.getInstance().init(this);
 
 		//Save map information of current robot
 		Action. Savemap();
+		Action. Savemap("name");
 
 		//Loading saved robot map information
 		Action. Loadmap();
+		Action. Loadmap("name");
 
 		//Robot speed setting (0.1-0.7, default 0.5)
 		Action. Setspeed (0.6f);

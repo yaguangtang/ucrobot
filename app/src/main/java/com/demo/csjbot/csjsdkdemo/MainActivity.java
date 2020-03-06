@@ -25,6 +25,7 @@ import com.csjbot.coshandler.listener.OnGetVersionListener;
 import com.csjbot.coshandler.listener.OnGoRotationListener;
 import com.csjbot.coshandler.listener.OnHeadTouchListener;
 import com.csjbot.coshandler.listener.OnHotWordsListener;
+import com.csjbot.coshandler.listener.OnMapListListener;
 import com.csjbot.coshandler.listener.OnNaviListener;
 import com.csjbot.coshandler.listener.OnNaviSearchListener;
 import com.csjbot.coshandler.listener.OnPositionListener;
@@ -320,6 +321,13 @@ public class MainActivity extends AppCompatActivity {
         // 开启语音识别(多次)
         mCsjBot.getSpeech().startIsr();
 
+        mCsjBot.getFace().getFaceDatabase(new OnGetAllFaceListener() {
+            @Override
+            public void personList(String s) {
+                Log.d("TAG","getFaceDatabase:"+s);
+            }
+        });
+
     }
 
     private void actionTest(){
@@ -458,8 +466,19 @@ public class MainActivity extends AppCompatActivity {
         // 保存当前机器人的地图信息
         action.saveMap();
 
+        action.saveMap("name");
+
         // 加载保存的机器人地图信息
         action.loadMap();
+
+        action.loadMap("name");
+
+        action.getMapList(new OnMapListListener() {
+            @Override
+            public void response(String s) {
+
+            }
+        });
 
         // 机器人速度设置(0.1-0.7,默认0.5)
         action.setSpeed(0.6f);

@@ -306,9 +306,11 @@ CsjRobot.getInstance().init(this);
 
         // 保存当前机器人的地图信息
         action.saveMap();
+        action.saveMap(String name);
 
         // 加载保存的机器人地图信息
         action.loadMap();
+        action.loadMap(String name);
 
         // 机器人速度设置(0.1-0.7,默认0.5)
         action.setSpeed(0.6f);

@@ -315,6 +315,15 @@ CsjRobot.getInstance().init(this);
 		//Robot speed setting (0.1-0.7, default 0.5)
 		Action. Setspeed (0.6f);
 
+
+        // Get all map
+        action.getMapList(new OnMapListListener() {
+            @Override
+            public void response(String s) {
+
+            }
+        });
+
 		//Navigation status query
         action.search(new OnNaviSearchListener() {
             @Override

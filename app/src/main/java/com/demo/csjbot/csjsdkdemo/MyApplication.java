@@ -28,6 +28,12 @@ public class MyApplication extends Application {
             }
         });
 
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         /**
          * 初始化SDK

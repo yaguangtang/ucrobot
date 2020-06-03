@@ -314,6 +314,14 @@ CsjRobot.getInstance().init(this);
 
         // 机器人速度设置(0.1-0.7,默认0.5)
         action.setSpeed(0.6f);
+        
+        // 获取所有地图
+        action.getMapList(new OnMapListListener() {
+            @Override
+            public void response(String s) {
+
+            }
+        });
 
         // 导航状态查询
         action.search(new OnNaviSearchListener() {

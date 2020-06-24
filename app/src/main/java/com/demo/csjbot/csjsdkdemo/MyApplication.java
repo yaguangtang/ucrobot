@@ -16,7 +16,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        CsjRobot.authentication(this,"123", "456", new OnAuthenticationListener() {
+        CsjRobot.authentication(this,"eaa67d5e-c120-4cc7-9af2-4197920cbc34", "166285BF869F1D7E77A38B53E2F52F56", new OnAuthenticationListener() {
             @Override
             public void success() {
                 Log.d("TAG","授权成功!");

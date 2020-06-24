@@ -4,6 +4,12 @@ android {
     compileSdkVersion 28
     buildToolsVersion '28.0.2'
 
+    android {
+        lintOptions {
+        abortOnError false
+    }
+    }
+
     defaultConfig {
         applicationId "com.demo.csjbot.csjsdkdemo"
         minSdkVersion 21
